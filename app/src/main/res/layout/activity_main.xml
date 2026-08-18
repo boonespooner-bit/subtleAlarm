@@ -88,8 +88,13 @@
                 android:layout_marginTop="34dp"
                 android:scaleX="1.15"
                 android:scaleY="1.15"
-                android:thumbTint="@color/gold"
-                android:trackTint="@color/line" />
+                android:text="@string/enable_alarm"
+                android:textColor="@color/text"
+                android:textSize="15sp"
+                android:letterSpacing="0.2"
+                android:switchPadding="16dp"
+                android:thumbTint="@color/switch_thumb"
+                android:trackTint="@color/switch_track" />
 
             <View
                 android:layout_width="match_parent"
