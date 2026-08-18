@@ -16,6 +16,10 @@ FRAMEWORK_RES="${FRAMEWORK_RES:-/usr/share/android-framework-res/framework-res.a
 OUT="$ROOT/build-offline"
 SRC="$ROOT/app/src/main"
 
+# version comes from version.properties (shared with the Gradle build)
+VERSION_CODE=$(grep '^versionCode=' "$ROOT/version.properties" | cut -d= -f2)
+VERSION_NAME=$(grep '^versionName=' "$ROOT/version.properties" | cut -d= -f2)
+
 rm -rf "$OUT"
 mkdir -p "$OUT/gen" "$OUT/classes" "$OUT/dex"
 
@@ -33,8 +37,8 @@ aapt package -f -m \
     -F "$OUT/resources.ap_" \
     --min-sdk-version 26 \
     --target-sdk-version 34 \
-    --version-code 1 \
-    --version-name 1.0
+    --version-code "$VERSION_CODE" \
+    --version-name "$VERSION_NAME"
 
 echo "== javac: compiling sources"
 find "$SRC/java" "$OUT/gen" -name '*.java' > "$OUT/sources.txt"
@@ -53,13 +57,19 @@ cp "$OUT/resources.ap_" "$OUT/unaligned.apk"
 
 zipalign -f -p 4 "$OUT/unaligned.apk" "$OUT/aligned.apk"
 
-KS="$OUT/debug.keystore"
-keytool -genkeypair -keystore "$KS" -storepass android -keypass android \
-    -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" \
-    -keyalg RSA -keysize 2048 -validity 10000 >/dev/null 2>&1
+# use the committed debug keystore so every build has the same signature
+# (otherwise `adb install -r` upgrades fail with a signature mismatch)
+KS="$ROOT/scripts/debug.keystore"
+if [ ! -f "$KS" ]; then
+    KS="$OUT/debug.keystore"
+    keytool -genkeypair -keystore "$KS" -storepass android -keypass android \
+        -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" \
+        -keyalg RSA -keysize 2048 -validity 10000 >/dev/null 2>&1
+fi
 
+APK="$OUT/SubtleAlarm-v$VERSION_NAME.apk"
 apksigner sign --ks "$KS" --ks-pass pass:android --key-pass pass:android \
-    --min-sdk-version 26 --out "$OUT/SubtleAlarm.apk" "$OUT/aligned.apk"
+    --min-sdk-version 26 --out "$APK" "$OUT/aligned.apk"
 
 rm -f "$OUT/unaligned.apk" "$OUT/aligned.apk"
-echo "== done: $OUT/SubtleAlarm.apk"
+echo "== done: $APK"

@@ -32,8 +32,8 @@ public final class BellSynth {
         float[] buf = new float[SAMPLE_RATE * 10];
         double[] ratios = {1.0, 2.76, 5.40};
         double[] amps = {1.0, 0.22, 0.05};
-        strike(buf, 0.0, 440.0, ratios, amps, 2.4, 0.02);
-        strike(buf, 1.8, 659.25, ratios, amps, 2.2, 0.02);
+        strike(buf, 0.0, 440.0, ratios, amps, 2.4, 0.03);
+        strike(buf, 1.8, 659.25, ratios, amps, 2.2, 0.03);
         return normalize(buf);
     }
 
@@ -42,10 +42,10 @@ public final class BellSynth {
         float[] buf = new float[SAMPLE_RATE * 12];
         double[] ratios = {1.0, 3.01};
         double[] amps = {1.0, 0.12};
-        strike(buf, 0.0, 440.00, ratios, amps, 1.8, 0.012);
-        strike(buf, 0.9, 554.37, ratios, amps, 1.8, 0.012);
-        strike(buf, 1.8, 659.25, ratios, amps, 1.8, 0.012);
-        scaleRegion(buf, 2.9, 880.00, ratios, amps, 1.6, 0.012, 0.6);
+        strike(buf, 0.0, 440.00, ratios, amps, 1.8, 0.018);
+        strike(buf, 0.9, 554.37, ratios, amps, 1.8, 0.018);
+        strike(buf, 1.8, 659.25, ratios, amps, 1.8, 0.018);
+        scaleRegion(buf, 2.9, 880.00, ratios, amps, 1.6, 0.018, 0.6);
         return normalize(buf);
     }
 
@@ -66,9 +66,12 @@ public final class BellSynth {
                                double tau, double attackSec) {
         int start = (int) (startSec * SAMPLE_RATE);
         int length = Math.min(buf.length - start, (int) (tau * 4 * SAMPLE_RATE));
+        // raised-cosine release over the final second so the decay reaches
+        // exactly zero - a hard truncation would click at the loop seam
+        int release = Math.min(length / 2, SAMPLE_RATE);
         for (int k = 0; k < ratios.length; k++) {
             double f = f0 * ratios[k];
-            double fDetuned = f * 1.0025;
+            double fDetuned = f * 1.0012;
             double partialTau = tau / Math.pow(k + 1, 0.85);
             double amp = amps[k];
             double w1 = 2 * Math.PI * f / SAMPLE_RATE;
@@ -80,6 +83,9 @@ public final class BellSynth {
                 if (i < attack) {
                     // raised-cosine ramp: soft mallet, no click
                     env *= 0.5 * (1 - Math.cos(Math.PI * i / (double) attack));
+                }
+                if (i >= length - release) {
+                    env *= 0.5 * (1 + Math.cos(Math.PI * (i - (length - release)) / (double) release));
                 }
                 double s = amp * env * (Math.sin(w1 * i) + 0.55 * Math.sin(w2 * i));
                 buf[start + i] += (float) s;
@@ -93,7 +99,9 @@ public final class BellSynth {
             float a = Math.abs(buf[i]);
             if (a > peak) peak = a;
         }
-        float scale = 0.72f * 32767f / peak;
+        // normalize to half of full scale (-6 dBFS): generous headroom so no
+        // playback chain is driven anywhere near clipping
+        float scale = 0.5f * 32767f / peak;
         short[] out = new short[buf.length];
         for (int i = 0; i < buf.length; i++) {
             out[i] = (short) (buf[i] * scale);

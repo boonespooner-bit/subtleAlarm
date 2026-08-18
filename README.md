@@ -43,9 +43,18 @@ scripts/build-offline.sh ./android-all-14-robolectric-10818077.jar
 # → build-offline/SubtleAlarm.apk
 ```
 
+## Versioning
+
+`version.properties` is the single source of truth for `versionCode` /
+`versionName`; the Gradle build and the offline script both read it, and every
+change bumps it. Each released build is committed as
+`apk/SubtleAlarm-v<version>.apk`, all signed with the same committed debug
+keystore (`scripts/debug.keystore`) so upgrades install cleanly with
+`adb install -r`.
+
 ## Installing on your device
 
-1. Copy `SubtleAlarm.apk` to your phone (or `adb install SubtleAlarm.apk`).
+1. Copy the APK from `apk/` to your phone (or `adb install -r apk/SubtleAlarm-v*.apk`).
 2. Allow installing from unknown sources when prompted (the APK is debug-signed).
 3. On first use, allow notifications when asked — the alarm uses a full-screen
    notification to open the wake screen over the lock screen.
