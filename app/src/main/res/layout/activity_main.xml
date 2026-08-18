@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.subtlealarm.app.GlowView
+        android:id="@+id/glow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wordmark"
+                android:textSize="12sp"
+                android:textColor="@color/text_dim"
+                android:fontFamily="sans-serif-light" />
+
+            <LinearLayout
+                android:id="@+id/timeRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:background="@drawable/row_bg"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/timeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6:30"
+                    android:textSize="84sp"
+                    android:textColor="@color/text"
+                    android:fontFamily="sans-serif-thin"
+                    android:includeFontPadding="false" />
+
+                <TextView
+                    android:id="@+id/ampmText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="14dp"
+                    android:text="AM"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_dim"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/countdownText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/alarm_off"
+                android:textSize="14sp"
+                android:textColor="@color/gold_dim"
+                android:fontFamily="sans-serif-light" />
+
+            <LinearLayout
+                android:id="@+id/dayRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:orientation="horizontal" />
+
+            <Switch
+                android:id="@+id/enableSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:scaleX="1.15"
+                android:scaleY="1.15"
+                android:thumbTint="@color/gold"
+                android:trackTint="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="38dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/toneRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/row_bg"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/SettingLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tone" />
+
+                <TextView
+                    android:id="@+id/toneValue"
+                    style="@style/SettingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dawn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fadeRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/row_bg"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/SettingLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/fade_in" />
+
+                <TextView
+                    android:id="@+id/fadeValue"
+                    style="@style/SettingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 minute" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/SettingLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/gentle_vibration" />
+
+                <Switch
+                    android:id="@+id/vibrateSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="@color/gold"
+                    android:trackTint="@color/line" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/SettingLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/volume" />
+
+                <SeekBar
+                    android:id="@+id/volumeSeek"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progressTint="@color/gold"
+                    android:thumbTint="@color/gold"
+                    android:progressBackgroundTint="@color/line" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/footer_hint"
+                android:textSize="12sp"
+                android:textColor="@color/text_dim"
+                android:fontFamily="sans-serif-light" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

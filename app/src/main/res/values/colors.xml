@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="night">#070B18</color>
+    <color name="night_deep">#05070F</color>
+    <color name="dusk">#111A33</color>
+    <color name="surface">#101729</color>
+    <color name="line">#1C2440</color>
+    <color name="gold">#E9C48E</color>
+    <color name="gold_dim">#8F7C58</color>
+    <color name="text">#ECEEF6</color>
+    <color name="text_dim">#7E86A0</color>
+    <color name="glow_warm">#FFD9A0</color>
+    <color name="ripple">#33E9C48E</color>
+</resources>

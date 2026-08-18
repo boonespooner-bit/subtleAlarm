@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Subtle" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_dusk</item>
+        <item name="android:statusBarColor">@color/night</item>
+        <item name="android:navigationBarColor">@color/night</item>
+        <item name="android:colorPrimary">@color/dusk</item>
+        <item name="android:colorPrimaryDark">@color/night</item>
+        <item name="android:colorAccent">@color/gold</item>
+        <item name="android:colorControlActivated">@color/gold</item>
+        <item name="android:colorControlNormal">@color/text_dim</item>
+        <item name="android:colorControlHighlight">@color/ripple</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorSecondary">@color/text_dim</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:timePickerDialogTheme">@style/Theme.Subtle.Dialog</item>
+        <item name="android:alertDialogTheme">@style/Theme.Subtle.Dialog</item>
+    </style>
+
+    <style name="Theme.Subtle.Dialog" parent="android:Theme.Material.Dialog">
+        <item name="android:colorAccent">@color/gold</item>
+        <item name="android:colorPrimary">@color/dusk</item>
+        <item name="android:colorControlActivated">@color/gold</item>
+        <item name="android:colorControlHighlight">@color/ripple</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorSecondary">@color/text_dim</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+        <item name="android:timePickerStyle">@style/Widget.Subtle.TimePicker</item>
+    </style>
+
+    <style name="Widget.Subtle.TimePicker" parent="android:Widget.Material.TimePicker">
+        <item name="android:headerBackground">@color/dusk</item>
+        <item name="android:numbersBackgroundColor">@color/surface</item>
+        <item name="android:numbersSelectorColor">@color/gold</item>
+        <item name="android:numbersTextColor">@color/text</item>
+    </style>
+
+    <style name="Theme.Subtle.Alarm" parent="Theme.Subtle">
+        <item name="android:windowBackground">@color/night_deep</item>
+        <item name="android:statusBarColor">@color/night_deep</item>
+        <item name="android:navigationBarColor">@color/night_deep</item>
+    </style>
+
+    <style name="SettingLabel">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="SettingValue">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/gold</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+</resources>
