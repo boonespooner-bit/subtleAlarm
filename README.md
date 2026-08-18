@@ -18,9 +18,10 @@ button, either volume button, or the on-screen dismiss button.
 - **Sunrise glow** — the wake screen brightens from deep night to warm first
   light in step with the sound
 - **Gentle vibration** (optional) — a soft, low-amplitude heartbeat pattern
-- **Breathing light** (optional) — the camera flash LED slowly fades in and out
-  (true fading on Android 13+ devices with torch strength control; a soft slow
-  pulse on devices whose torch is only on/off)
+- **Breathing light** (optional) — the camera flash LED slowly fades in and out,
+  peaking at just 10% of full torch strength so it stays a dim ember in a dark
+  room (true fading on Android 13+ devices with torch strength control; a brief
+  soft pulse on devices whose torch is only on/off)
 - **One-touch dismissal** — power button, volume up/down, or the on-screen button
 - **Repeat days**, per-alarm volume, minimalist dusk-palette UI
 - **Zero dependencies** — pure Android framework Java; the APK is ~50 KB
