@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
     private TextView fadeValue;
     private Switch enableSwitch;
     private Switch vibrateSwitch;
+    private Switch ledSwitch;
     private SeekBar volumeSeek;
     private final TextView[] dayViews = new TextView[7];
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -68,6 +69,7 @@ public class MainActivity extends Activity {
         fadeValue = (TextView) findViewById(R.id.fadeValue);
         enableSwitch = (Switch) findViewById(R.id.enableSwitch);
         vibrateSwitch = (Switch) findViewById(R.id.vibrateSwitch);
+        ledSwitch = (Switch) findViewById(R.id.ledSwitch);
         volumeSeek = (SeekBar) findViewById(R.id.volumeSeek);
 
         buildDayRow();
@@ -98,6 +100,15 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (suppressCallbacks) return;
                 store.vibrate = isChecked;
+                store.save(MainActivity.this);
+            }
+        });
+
+        ledSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (suppressCallbacks) return;
+                store.led = isChecked;
                 store.save(MainActivity.this);
             }
         });
@@ -217,6 +228,7 @@ public class MainActivity extends Activity {
         suppressCallbacks = true;
         enableSwitch.setChecked(store.enabled);
         vibrateSwitch.setChecked(store.vibrate);
+        ledSwitch.setChecked(store.led);
         suppressCallbacks = false;
 
         volumeSeek.setProgress((int) (store.volume * 100));

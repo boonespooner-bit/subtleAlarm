@@ -22,6 +22,7 @@ public final class AlarmStore {
     public int daysMask = 0;
     public boolean enabled = false;
     public boolean vibrate = true;
+    public boolean led = false;
     public int tone = TONE_DAWN;
     public int fadeSec = 60;
     public float volume = 0.6f;
@@ -36,6 +37,7 @@ public final class AlarmStore {
         s.daysMask = p.getInt("daysMask", 0);
         s.enabled = p.getBoolean("enabled", false);
         s.vibrate = p.getBoolean("vibrate", true);
+        s.led = p.getBoolean("led", false);
         s.tone = p.getInt("tone", TONE_DAWN);
         s.fadeSec = p.getInt("fadeSec", 60);
         s.volume = p.getFloat("volume", 0.6f);
@@ -49,6 +51,7 @@ public final class AlarmStore {
                 .putInt("daysMask", daysMask)
                 .putBoolean("enabled", enabled)
                 .putBoolean("vibrate", vibrate)
+                .putBoolean("led", led)
                 .putInt("tone", tone)
                 .putInt("fadeSec", fadeSec)
                 .putFloat("volume", volume)

@@ -45,6 +45,7 @@ public class AlarmService extends Service {
 
     private AudioTrack track;
     private Vibrator vibrator;
+    private LedBreather ledBreather;
     private BroadcastReceiver screenOffReceiver;
     private PowerManager.WakeLock wakeLock;
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -116,6 +117,10 @@ public class AlarmService extends Service {
 
         startSound(store);
         if (store.vibrate) startVibration();
+        if (store.led) {
+            ledBreather = new LedBreather(this, handler);
+            ledBreather.start();
+        }
 
         screenOffReceiver = new BroadcastReceiver() {
             @Override
@@ -185,6 +190,10 @@ public class AlarmService extends Service {
         if (vibrator != null) {
             vibrator.cancel();
             vibrator = null;
+        }
+        if (ledBreather != null) {
+            ledBreather.stop();
+            ledBreather = null;
         }
         if (wakeLock != null && wakeLock.isHeld()) {
             wakeLock.release();
