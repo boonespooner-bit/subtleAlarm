@@ -30,6 +30,8 @@
         <activity
             android:name=".AlarmActivity"
             android:exported="false"
+            android:resizeableActivity="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|density|uiMode|keyboardHidden"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:showWhenLocked="true"

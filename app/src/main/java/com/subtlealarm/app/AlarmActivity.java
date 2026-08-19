@@ -65,12 +65,16 @@ public class AlarmActivity extends Activity {
                 SystemClock.elapsedRealtime());
         fadeSec = getIntent().getIntExtra(AlarmService.EXTRA_FADE_SEC, 60);
 
-        findViewById(R.id.dismissButton).setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener dismissOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
-        });
+        };
+        findViewById(R.id.dismissButton).setOnClickListener(dismissOnClick);
+        // safety net: if any device ever clips or covers the button, tapping
+        // the screen itself still stops the alarm
+        findViewById(R.id.alarmRoot).setOnClickListener(dismissOnClick);
 
         stoppedReceiver = new BroadcastReceiver() {
             @Override

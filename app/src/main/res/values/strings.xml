@@ -10,7 +10,7 @@
     <string name="volume">Volume</string>
     <string name="dismiss">dismiss</string>
     <string name="time_to_wake">t i m e&#160;&#160;t o&#160;&#160;w a k e</string>
-    <string name="dismiss_hint">power or volume button also dismisses</string>
+    <string name="dismiss_hint">or tap anywhere, or press power or volume</string>
     <string name="footer_hint">wakes you softly, lets them sleep</string>
     <string name="notif_channel_alarm">Alarm</string>
     <string name="notif_title">Subtle Alarm</string>

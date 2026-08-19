@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alarmRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/night_deep">
@@ -9,61 +10,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- fitsSystemWindows keeps the dismiss control clear of the navigation
+         bar, display cutouts, and the large-screen taskbar on foldables -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:fitsSystemWindows="true">
 
-        <TextView
-            android:id="@+id/clockText"
-            android:layout_width="wrap_content"
+        <!-- weighted: the clock yields space so the button below is never
+             squeezed off-screen on short or half-open windows -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/clockText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6:30"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="28sp"
+                    android:autoSizeMaxTextSize="76sp"
+                    android:textSize="76sp"
+                    android:textColor="@color/text"
+                    android:fontFamily="sans-serif-thin"
+                    android:includeFontPadding="false" />
+
+                <TextView
+                    android:id="@+id/wakeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/time_to_wake"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:textColor="@color/gold_dim"
+                    android:fontFamily="sans-serif-light" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- wrap_content and unweighted: measured before the clock, so this
+             block always claims the room it needs -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="6:30"
-            android:textSize="76sp"
-            android:textColor="@color/text"
-            android:fontFamily="sans-serif-thin"
-            android:includeFontPadding="false" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="28dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/time_to_wake"
-            android:textSize="13sp"
-            android:textColor="@color/gold_dim"
-            android:fontFamily="sans-serif-light" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/dismissButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="64dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:background="@drawable/btn_dismiss"
+                android:text="@string/dismiss"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:letterSpacing="0.25"
+                android:textColor="@color/gold"
+                android:fontFamily="sans-serif-light"
+                android:stateListAnimator="@null" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="56dp">
-
-        <Button
-            android:id="@+id/dismissButton"
-            android:layout_width="220dp"
-            android:layout_height="72dp"
-            android:background="@drawable/btn_dismiss"
-            android:text="@string/dismiss"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:letterSpacing="0.25"
-            android:textColor="@color/gold"
-            android:fontFamily="sans-serif-light"
-            android:stateListAnimator="@null" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="@string/dismiss_hint"
-            android:textSize="11sp"
-            android:textColor="@color/text_dim"
-            android:fontFamily="sans-serif-light" />
+            <TextView
+                android:id="@+id/dismissHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/dismiss_hint"
+                android:gravity="center"
+                android:textSize="11sp"
+                android:textColor="@color/text_dim"
+                android:fontFamily="sans-serif-light" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

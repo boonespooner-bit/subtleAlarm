@@ -22,7 +22,8 @@ button, either volume button, or the on-screen dismiss button.
   peaking at just 10% of full torch strength so it stays a dim ember in a dark
   room (true fading on Android 13+ devices with torch strength control; a brief
   soft pulse on devices whose torch is only on/off)
-- **One-touch dismissal** — power button, volume up/down, or the on-screen button
+- **One-touch dismissal** — power button, volume up/down, the on-screen button,
+  or a tap anywhere on the wake screen
 - **Repeat days**, per-alarm volume, minimalist dusk-palette UI
 - **Zero dependencies** — pure Android framework Java; the APK is ~50 KB
 - Auto-silences after 15 minutes; reschedules itself after reboot and time changes
@@ -67,7 +68,11 @@ keystore (`scripts/debug.keystore`) so upgrades install cleanly with
 
 ## How dismissal works
 
-- **On-screen button / volume keys** — handled directly by the wake screen.
+- **On-screen button / tap anywhere / volume keys** — handled directly by the
+  wake screen. The wake screen reserves space for the dismiss button before the
+  clock and honors window insets, so the button stays visible and reachable on
+  short windows, foldables (including under the large-screen taskbar), and
+  split-screen.
 - **Power button** — Android doesn't deliver power-key presses to apps; instead,
   the alarm listens for the screen turning off (which is what the power button
   does while the alarm is showing) and stops immediately.
