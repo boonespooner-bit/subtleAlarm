@@ -87,6 +87,7 @@ public class MainActivity extends Activity {
                 if (suppressCallbacks) return;
                 store.enabled = isChecked;
                 store.save(MainActivity.this);
+                updateEnableLabel();
                 if (isChecked) {
                     ensurePermissions();
                 }
@@ -184,6 +185,10 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void updateEnableLabel() {
+        enableSwitch.setText(store.enabled ? R.string.alarm_on : R.string.alarm_off_label);
+    }
+
     private void refreshDayRow() {
         for (int i = 0; i < 7; i++) {
             boolean on = (store.daysMask & (1 << i)) != 0;
@@ -232,6 +237,7 @@ public class MainActivity extends Activity {
         suppressCallbacks = false;
 
         volumeSeek.setProgress((int) (store.volume * 100));
+        updateEnableLabel();
         refreshDayRow();
         updateCountdown();
     }

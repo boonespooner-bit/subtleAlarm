@@ -88,7 +88,7 @@
                 android:layout_marginTop="34dp"
                 android:scaleX="1.15"
                 android:scaleY="1.15"
-                android:text="@string/enable_alarm"
+                android:text="@string/alarm_off_label"
                 android:textColor="@color/text"
                 android:textSize="15sp"
                 android:letterSpacing="0.2"
