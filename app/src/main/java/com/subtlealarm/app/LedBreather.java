@@ -8,17 +8,24 @@ import android.os.Handler;
 import android.os.SystemClock;
 
 /**
- * Breathes the camera flash LED while the alarm plays: a slow fade in and
- * out on devices with torch strength control (Android 13+), or a soft slow
- * pulse where the torch is only on/off.
+ * Breathes the camera flash LED while the alarm plays: a slow linear climb
+ * from off to a very dim ceiling over five seconds, then an equally slow
+ * five-second fall back to off. Devices without torch strength control
+ * (pre-Android 13, or hardware with an on/off-only torch) get a brief soft
+ * pulse near the top of each breath instead.
  */
 public class LedBreather {
 
-    private static final double PERIOD_SEC = 6.0;
+    /** Seconds to climb from off to the ceiling, and the same again to fall
+     *  back to off - one full breath is twice this. */
+    private static final double RAMP_SEC = 5.0;
+    private static final double PERIOD_SEC = RAMP_SEC * 2;
 
     /** Ceiling on torch output: the breath peaks at this fraction of full
-     *  strength, so the light stays a dim ember in a dark room. */
-    private static final double MAX_BRIGHTNESS = 0.10;
+     *  strength, so the light stays a dim ember in a dark room. On a device
+     *  reporting 100 strength levels this steps 1% at a time, one step per
+     *  second, up to 5% and back down. */
+    private static final double MAX_BRIGHTNESS = 0.05;
 
     private final CameraManager cameraManager;
     private final Handler handler;
@@ -35,7 +42,7 @@ public class LedBreather {
         public void run() {
             if (!running) return;
             step();
-            handler.postDelayed(this, maxStrength > 1 ? 120 : 250);
+            handler.postDelayed(this, 200);
         }
     };
 
@@ -87,8 +94,12 @@ public class LedBreather {
 
     private void step() {
         double t = (SystemClock.elapsedRealtime() - startElapsed) / 1000.0;
-        // 0 -> 1 -> 0 over each period, smooth at both ends
-        double phase = 0.5 * (1 - Math.cos(2 * Math.PI * t / PERIOD_SEC));
+        // linear triangle: 0 -> 1 over RAMP_SEC, then 1 -> 0 over RAMP_SEC,
+        // so each brightness step is held for an equal slice of the ramp
+        double cycle = t % PERIOD_SEC;
+        double phase = cycle < RAMP_SEC
+                ? cycle / RAMP_SEC
+                : (PERIOD_SEC - cycle) / (PERIOD_SEC - RAMP_SEC);
         try {
             if (Build.VERSION.SDK_INT >= 33 && maxStrength > 1) {
                 int level = (int) Math.round(phase * peakLevel);
