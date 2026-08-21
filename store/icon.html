@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;width:512px;height:512px;overflow:hidden}
+  .icon{position:relative;width:512px;height:512px;
+    background:radial-gradient(120% 120% at 50% 78%, #16213f 0%, #0b1024 45%, #070b18 100%);}
+  .halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%}
+  .h1{width:460px;height:460px;background:radial-gradient(circle,rgba(233,196,142,.11) 0%,rgba(233,196,142,0) 70%)}
+  .h2{width:330px;height:330px;background:radial-gradient(circle,rgba(233,196,142,.16) 0%,rgba(233,196,142,0) 70%)}
+  .h3{width:210px;height:210px;background:radial-gradient(circle,rgba(255,214,160,.22) 0%,rgba(255,214,160,0) 72%)}
+  /* rising sun: half disc resting on the horizon */
+  .sun{position:absolute;left:50%;top:200px;transform:translateX(-50%);
+    width:176px;height:88px;border-radius:88px 88px 0 0;
+    background:linear-gradient(180deg,#F6DCB4 0%,#E9C48E 55%,#D9AE73 100%);}
+  .horizon{position:absolute;left:50%;top:288px;transform:translateX(-50%);
+    width:320px;height:9px;border-radius:5px;
+    background:linear-gradient(90deg,rgba(233,196,142,0) 0%,#E9C48E 22%,#F2D3A6 50%,#E9C48E 78%,rgba(233,196,142,0) 100%);}
+  .sheen{position:absolute;left:50%;top:250px;transform:translateX(-50%);
+    width:250px;height:70px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(255,220,170,.30) 0%,rgba(255,220,170,0) 70%);}
+</style></head><body>
+<div class="icon">
+  <div class="halo h1"></div><div class="halo h2"></div><div class="halo h3"></div>
+  <div class="sheen"></div><div class="sun"></div><div class="horizon"></div>
+</div></body></html>

@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;width:1024px;height:500px;overflow:hidden;background:#070b18}
+  .fg{position:relative;width:1024px;height:500px;
+    background:radial-gradient(125% 145% at 40% 112%, #1d2a4e 0%, #111a3a 36%, #0a1023 68%, #070b18 100%);
+    display:flex;align-items:center;justify-content:center;gap:70px;}
+  .glow{position:absolute;left:38%;bottom:-320px;transform:translateX(-50%);
+    width:900px;height:640px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,203,144,.30) 0%,rgba(233,196,142,.12) 42%,rgba(233,196,142,0) 72%)}
+  .mark{position:relative;width:186px;height:186px;flex:none}
+  .halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%}
+  .h1{width:196px;height:196px;background:radial-gradient(circle,rgba(233,196,142,.16) 0%,rgba(233,196,142,0) 70%)}
+  .h2{width:130px;height:130px;background:radial-gradient(circle,rgba(255,214,160,.22) 0%,rgba(255,214,160,0) 72%)}
+  .sun{position:absolute;left:50%;top:64px;transform:translateX(-50%);
+    width:104px;height:52px;border-radius:52px 52px 0 0;
+    background:linear-gradient(180deg,#F6DCB4 0%,#E9C48E 55%,#D9AE73 100%)}
+  .horizon{position:absolute;left:50%;top:116px;transform:translateX(-50%);
+    width:188px;height:6px;border-radius:3px;
+    background:linear-gradient(90deg,rgba(233,196,142,0) 0%,#E9C48E 24%,#F2D3A6 50%,#E9C48E 76%,rgba(233,196,142,0) 100%)}
+  .copy{position:relative}
+  .name{font-family:'Liberation Sans',Arial,sans-serif;font-weight:400;
+    font-size:60px;line-height:1;color:#F4F1F8;letter-spacing:.20em;margin:0;white-space:nowrap}
+  .rule{width:88px;height:1px;background:#E9C48E;opacity:.6;margin:32px 0 26px}
+  .tag{font-family:'Liberation Sans',Arial,sans-serif;font-weight:400;font-size:23px;line-height:1.5;
+    color:#AEB6CC;letter-spacing:.045em;margin:0}
+  .tag b{color:#E9C48E;font-weight:400}
+</style></head><body>
+<div class="fg">
+  <div class="glow"></div>
+  <div class="mark">
+    <div class="halo h1"></div><div class="halo h2"></div>
+    <div class="sun"></div><div class="horizon"></div>
+  </div>
+  <div class="copy">
+    <p class="name">Subtle Alarm</p>
+    <div class="rule"></div>
+    <p class="tag">Soft bells and a slow sunrise glow.<br>Wakes you &mdash; <b>lets them keep sleeping.</b></p>
+  </div>
+</div></body></html>
