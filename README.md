@@ -34,7 +34,7 @@ button, either volume button, or the on-screen dismiss button.
 ### With Android Studio / Gradle (normal path)
 
 Open the project in Android Studio (or run `./gradlew assembleDebug`) with an
-Android SDK for API 34 installed. There are no library dependencies.
+Android SDK for API 36 installed. There are no library dependencies.
 
 ### Without the Android SDK (offline path)
 
@@ -57,6 +57,31 @@ change bumps it. Each released build is committed as
 `apk/SubtleAlarm-v<version>.apk`, all signed with the same committed debug
 keystore (`scripts/debug.keystore`) so upgrades install cleanly with
 `adb install -r`.
+
+## Building a release bundle for Google Play
+
+Play needs a signed `.aab`, and it must be signed with your own upload key --
+never the committed debug keystore.
+
+```bash
+# 1. create your upload key (once; keep it safe, it can never be replaced)
+keytool -genkeypair -v -keystore upload-keystore.jks \
+    -alias upload -keyalg RSA -keysize 2048 -validity 10000
+
+# 2. point the build at it
+cp keystore.properties.example keystore.properties
+#    then edit keystore.properties with your passwords
+
+# 3. build the bundle
+./gradlew bundleRelease
+#    -> app/build/outputs/bundle/release/app-release.aab
+```
+
+`keystore.properties`, `*.jks` and `upload-keystore*` are gitignored. If you
+lose the upload key you cannot ship updates to existing installs, so back it up
+somewhere durable.
+
+Requires Android SDK Platform 36 and AGP 8.9+ (both are set in the build files).
 
 ## Installing on your device
 

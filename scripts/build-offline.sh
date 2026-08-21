@@ -36,7 +36,7 @@ aapt package -f -m \
     -J "$OUT/gen" \
     -F "$OUT/resources.ap_" \
     --min-sdk-version 26 \
-    --target-sdk-version 34 \
+    --target-sdk-version 36 \
     --version-code "$VERSION_CODE" \
     --version-name "$VERSION_NAME"
 

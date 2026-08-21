@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.view.KeyEvent;
+import android.window.OnBackInvokedDispatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -82,6 +83,20 @@ public class AlarmActivity extends Activity {
                 finish();
             }
         };
+        // targetSdk 35+ enables predictive back, which routes the gesture to
+        // OnBackInvokedCallback instead of onBackPressed(). Without this the
+        // screen would close while the alarm kept ringing.
+        if (Build.VERSION.SDK_INT >= 33) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                    new android.window.OnBackInvokedCallback() {
+                        @Override
+                        public void onBackInvoked() {
+                            dismiss();
+                        }
+                    });
+        }
+
         IntentFilter filter = new IntentFilter(AlarmService.ACTION_ALARM_STOPPED);
         if (Build.VERSION.SDK_INT >= 33) {
             registerReceiver(stoppedReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
@@ -115,6 +130,7 @@ public class AlarmActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /** Pre-33 back handling; API 33+ goes through OnBackInvokedCallback. */
     @Override
     public void onBackPressed() {
         dismiss();

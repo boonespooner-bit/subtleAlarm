@@ -8,3 +8,8 @@ captures/
 .externalNativeBuild/
 .cxx/
 build-offline/
+
+# release signing - never commit
+keystore.properties
+*.jks
+upload-keystore*

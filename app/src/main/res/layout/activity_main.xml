@@ -8,11 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- targetSdk 35+ is edge-to-edge: inset the content so it clears the
+         status and navigation bars. The glow behind stays full-bleed. -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
