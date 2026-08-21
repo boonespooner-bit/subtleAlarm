@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
     private AlarmStore store;
     private TextView timeText;
     private TextView ampmText;
-    private TextView countdownText;
     private TextView toneValue;
     private TextView fadeValue;
     private Switch enableSwitch;
@@ -64,7 +63,6 @@ public class MainActivity extends Activity {
 
         timeText = (TextView) findViewById(R.id.timeText);
         ampmText = (TextView) findViewById(R.id.ampmText);
-        countdownText = (TextView) findViewById(R.id.countdownText);
         toneValue = (TextView) findViewById(R.id.toneValue);
         fadeValue = (TextView) findViewById(R.id.fadeValue);
         enableSwitch = (Switch) findViewById(R.id.enableSwitch);
@@ -87,7 +85,6 @@ public class MainActivity extends Activity {
                 if (suppressCallbacks) return;
                 store.enabled = isChecked;
                 store.save(MainActivity.this);
-                updateEnableLabel();
                 if (isChecked) {
                     ensurePermissions();
                 }
@@ -185,10 +182,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void updateEnableLabel() {
-        enableSwitch.setText(store.enabled ? R.string.alarm_on : R.string.alarm_off_label);
-    }
-
     private void refreshDayRow() {
         for (int i = 0; i < 7; i++) {
             boolean on = (store.daysMask & (1 << i)) != 0;
@@ -237,14 +230,14 @@ public class MainActivity extends Activity {
         suppressCallbacks = false;
 
         volumeSeek.setProgress((int) (store.volume * 100));
-        updateEnableLabel();
         refreshDayRow();
         updateCountdown();
     }
 
+    /** The toggle's label is the app's only alarm-state readout. */
     private void updateCountdown() {
         if (!store.enabled) {
-            countdownText.setText(R.string.alarm_off);
+            enableSwitch.setText(R.string.alarm_off);
             return;
         }
         long now = System.currentTimeMillis();
@@ -257,7 +250,7 @@ public class MainActivity extends Activity {
         if (days > 0) sb.append(days).append("d ");
         if (hours > 0 || days > 0) sb.append(hours).append("h ");
         sb.append(m).append("m");
-        countdownText.setText(sb.toString());
+        enableSwitch.setText(sb.toString());
     }
 
     private void ensurePermissions() {

@@ -15,6 +15,4 @@
     <string name="notif_channel_alarm">Alarm</string>
     <string name="notif_title">Subtle Alarm</string>
     <string name="notif_text">Softly waking you</string>
-    <string name="alarm_on">alarm on</string>
-    <string name="alarm_off_label">alarm off</string>
 </resources>

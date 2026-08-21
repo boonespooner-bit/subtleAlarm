@@ -64,34 +64,24 @@
                     android:fontFamily="sans-serif-light" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/countdownText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@string/alarm_off"
-                android:textSize="14sp"
-                android:textColor="@color/gold_dim"
-                android:fontFamily="sans-serif-light" />
-
             <LinearLayout
                 android:id="@+id/dayRow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal" />
 
             <Switch
                 android:id="@+id/enableSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="40dp"
                 android:scaleX="1.15"
                 android:scaleY="1.15"
-                android:text="@string/alarm_off_label"
+                android:text="@string/alarm_off"
                 android:textColor="@color/text"
                 android:textSize="15sp"
-                android:letterSpacing="0.2"
+                android:maxLines="1"
                 android:switchPadding="16dp"
                 android:thumbTint="@color/switch_thumb"
                 android:trackTint="@color/switch_track" />
