@@ -60,8 +60,9 @@ keystore (`scripts/debug.keystore`) so upgrades install cleanly with
 
 ## Building a release bundle for Google Play
 
-Play needs a signed `.aab`, and it must be signed with your own upload key --
-never the committed debug keystore.
+See **[RELEASE.md](RELEASE.md)** for the full process. In short — Play needs a
+signed `.aab`, and it must be signed with your own upload key, never the
+committed debug keystore.
 
 ```bash
 # 1. create your upload key (once; keep it safe, it can never be replaced)
