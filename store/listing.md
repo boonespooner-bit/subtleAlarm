@@ -48,9 +48,30 @@ No snooze. No multiple alarms. No puzzles, no shaking, no barcode scanning. It d
 For anyone who wakes before their partner — early shifts, early flights, early runs — and would rather not take someone else's morning with them.
 
 ## Release notes (500 max)
+
+Play Console pre-fills `<en-US>` tags — paste between them.
+
+### Closed testing (testers see this)
+
+Thanks for helping test Subtle Alarm.
+
+Set an alarm a few minutes out and let it ring. The bell should start almost inaudible and swell slowly — it is meant to wake you without waking the person next to you.
+
+Please try dismissing three ways: the power button, either volume key, and the on-screen button.
+
+Also worth trying: all three tones, a five-minute fade, and the breathing light.
+
+Tell me about anything that fails to ring, won't dismiss, or wakes your partner.
+
+### Production (first public release)
+
 First release.
 
-Three synthesized bell tones, a fade-in of up to five minutes, a sunrise wake screen, optional gentle vibration and a breathing flash-LED light. Dismiss with the power button, either volume key, the on-screen button, or a tap anywhere.
+Wake to soft synthesized bells that fade in over up to five minutes, a sunrise glow that brightens with the sound, and an optional gentle vibration or slow breathing light.
+
+Dismiss with the power button, either volume key, the on-screen button, or a tap anywhere.
+
+No ads, no accounts, no internet permission.
 
 ## Store settings
 - Category: Tools (alternative: Lifestyle)
